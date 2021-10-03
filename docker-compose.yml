@@ -1,0 +1,27 @@
+#--------------------------------------------------------------
+# HelixCore docker-compose
+#--------------------------------------------------------------
+version: '3'
+
+#---NETWORKS---------------------------------------------------
+networks:
+  default:
+    external:
+      name: common
+
+#---SERVICES---------------------------------------------------
+services:
+  auth-svc:
+    build:
+      context: ./auth
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    privileged: true
+    tty: true
+    command:
+      - /sbin/init
+    image: auth-svc
+    ports:
+      - "3000:3000"

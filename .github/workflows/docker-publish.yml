@@ -1,0 +1,59 @@
+name: helix-auth-svc
+
+on:
+  push:
+    # Publish `v1.2.3` tags as releases.
+    branch:
+      - develop
+
+jobs:
+  # Run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run tests
+        run: |
+            docker build -t $GITHUB_WORKFLOW -f ./auth/Dockerfile ./auth
+#          if [ -f docker-compose.yml ]; then
+#            docker-compose --file docker-compose.yml build --no-cache
+#          else
+#            docker build . --file ./auth/Dockerfile.$OS_NAME
+#          fi
+
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+    # Ensure test job passes before pushing image.
+    needs: test
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build -t $GITHUB_WORKFLOW -f ./auth/Dockerfile ./auth
+        
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$GITHUB_WORKFLOW
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          echo IMAGE_ID=$IMAGE_ID
+          echo $GITHUB_RUN_NUMBER
+
+          docker tag $GITHUB_WORKFLOW $IMAGE_ID:$GITHUB_RUN_NUMBER
+          docker push $IMAGE_ID:$GITHUB_RUN_NUMBER
+
+          docker tag $GITHUB_WORKFLOW $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
