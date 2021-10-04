@@ -5,12 +5,18 @@ COPY files/get-keyvault-certificate.sh /opt/perforce/helix-auth-svc/get-keyvault
 COPY files/ecosystem.config.js /opt/perforce/helix-auth-svc/ecosystem.config.js
 COPY files/run.sh /usr/local/bin/run.sh
 
-RUN dnf -y install centos-release-stream yum-utils glibc-locale-source cronie sudo glibc-langpack-ja glibc glibc-common tzdata logrotate openssl git \
+ARG USER=perforce
+ARG PASSWD=perforce
+
+RUN dnf -y install centos-release-stream yum-utils glibc-locale-source cronie sudo glibc-langpack-ja glibc glibc-common tzdata logrotate openssl git wget unzip \
     && dnf -y swap centos-{linux,stream}-repos \
     && dnf -y distro-sync \
     && rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial \
     && dnf -y upgrade \
     && dnf -y update \
+    && useradd -m $USER \
+    && echo "$USER:$PASSWD" | chpasswd \
+    && echo "$USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
     && cd /lib/systemd/system/sysinit.target.wants/ && \
     for i in *; do \
         [ $i == systemd-tmpfiles-setup.service ] || rm -vf $i ; \
@@ -42,6 +48,7 @@ RUN dnf -y install centos-release-stream yum-utils glibc-locale-source cronie su
     && sudo dnf -q -y install nodejs \
     && sudo npm install -g pm2 \
     && sudo dnf -y install helix-auth-svc \
+    && rm -Rf /opt/perforce/helix-auth-svc \
     && bash run.sh
 
 EXPOSE 3000
@@ -53,4 +60,3 @@ ENV LANG="ja_JP.UTF-8" \
 ENTRYPOINT ["run.sh"]
 
 CMD [ "/sbin/init" ]
-
