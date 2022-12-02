@@ -45,6 +45,7 @@ RUN wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - ;\
 
 RUN apt-get update && apt-get -y install helix-p4d helix-auth-svc nodejs npm \
     && npm install -g pm2 \
+    && npm i -g pm2 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
