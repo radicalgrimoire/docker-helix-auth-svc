@@ -1,6 +1,6 @@
 STACK=auth-svc
 COMPOSE_FILE=docker-compose.yml
-CONTAINER=${STACK}_auth-svc_1
+CONTAINER=helix-auth-svc
 
 start:
 	docker-compose -f ${COMPOSE_FILE} -p ${STACK} up -d
