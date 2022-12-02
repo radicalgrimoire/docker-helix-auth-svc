@@ -37,7 +37,7 @@ ARG PASSWORD=perforce
 RUN groupadd -g $GID $GROUPNAME && \
     useradd -m -s /bin/bash -u $UID -g $GID -G sudo $USERNAME && \
     echo $USERNAME:$PASSWORD | chpasswd && \
-    echo "$USERNAME   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    echo "$USERNAME   ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RUN echo 'export LANG=ja_JP.UTF-8' >> ~/.bashrc ;\
     echo 'export LANGUAGE="ja_JP:ja"' >> ~/.bashrc
