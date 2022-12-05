@@ -22,7 +22,7 @@ ENV P4NAME=$P4NAME \
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-RUN apt-get update -y && apt-get install -y wget gnupg less language-pack-ja-base language-pack-ja tzdata curl jq git openssl sudo vim wget unzip cron logrotate init systemd build-essential nodejs npm node-gyp
+RUN apt-get update -y && apt-get install -y wget gnupg less language-pack-ja-base language-pack-ja tzdata curl jq git openssl sudo vim wget unzip cron logrotate init systemd build-essential nodejs npm node-gyp apt-utils
 
 ARG USERNAME=perforce
 ARG GROUPNAME=perforce
