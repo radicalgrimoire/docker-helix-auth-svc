@@ -52,10 +52,13 @@ RUN mkdir -p /opt/perforce/ \
     && npm i -g pm2 \
     && cd /
 
-RUN cd /opt/perforce/helix-auth-svc \
-    && npm install --save module-alias \
-    && cd / \
-    && apt-get clean \
+WORKDIR /opt/perforce/helix-auth-svc
+
+RUN npm install --save module-alias
+
+WORKDIR /
+
+RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 3000
