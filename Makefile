@@ -17,3 +17,7 @@ build:
 	docker-compose -f ${COMPOSE_FILE} build
 rebuild:
 	docker-compose -f ${COMPOSE_FILE} build --no-cache
+
+net:
+	docker network create helixcore_app_net
+

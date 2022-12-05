@@ -14,8 +14,7 @@
 module.exports = {
   apps: [{
     name: 'auth-svc',
-    node_args: '-r module-alias/register',
-    script: './bin/www',
+    script: './bin/www.js',
     env: {
       CA_CERT_FILE: 'certs/ca.crt',
       NODE_ENV: 'production',
@@ -25,8 +24,8 @@ module.exports = {
       SAML_IDP_SSO_URL: 'http://localhost:7000/saml/sso',
       SAML_IDP_SLO_URL: 'http://localhost:7000/saml/slo',
       SAML_SP_ENTITY_ID: 'https://has.example.com',
-      SP_CERT_FILE: 'certs/server.crt',
-      SP_KEY_FILE: 'certs/server.key',
+      CERT_FILE: 'certs/server.crt',
+      KEY_FILE: 'certs/server.key',
       SVC_BASE_URI: 'https://localhost:3000'
       //
       // Below are additional optional settings and their default values.
@@ -38,20 +37,27 @@ module.exports = {
       // DEFAULT_PROTOCOL: 'saml',
       // FORCE_AUTHN: false,
       // IDP_CERT_FILE: undefined,
+      // INSTANCE_ID: 'none',
       // LOGGING: undefined,
       // SAML_IDP_ENTITY_ID: undefined,
-      // IDP_CONFIG_FILE: './saml_idp.conf.js',
+      // IDP_CONFIG_FILE: './saml_idp.conf.cjs',
       // LOGIN_TIMEOUT: 60,
+      // KEY_PASSPHRASE: undefined,
+      // KEY_PASSPHRASE_FILE: undefined,
       // OIDC_CLIENT_SECRET: undefined,
+      // PFX_FILE: undefined,
       // PORT: 3000,
       // PROTOCOL: 'http',
+      // REDIS_URL: undefined,
       // SAML_AUTHN_CONTEXT: 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport',
       // SAML_IDP_METADATA_URL: undefined,
       // SAML_NAMEID_FIELD: undefined,
       // SAML_NAMEID_FORMAT: 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
       // SAML_SP_AUDIENCE: undefined,
+      // SAML_DISABLE_CONTEXT: true,
       // SESSION_SECRET: 'keyboard cat',
       // SP_KEY_ALGO: 'sha256',
+      // TRUST_PROXY: undefined,
     }
   }]
 }
