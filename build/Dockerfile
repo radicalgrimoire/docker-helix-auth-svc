@@ -52,7 +52,7 @@ RUN mkdir -p /opt/perforce/ \
     && npm i -g pm2 \
     && cd /
 
-WORKDIR /opt/perforce/helix-auth-svc
+WORKDIR /opt/
 
 RUN npm install --save module-alias
 
