@@ -46,20 +46,18 @@ RUN curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
 RUN mkdir -p /opt/perforce/ \
     && cd /opt/perforce/ \
     && wget https://github.com/perforce/helix-authentication-service/archive/refs/tags/2020.2.zip \
-    && unzip 2020.2.zip \
-    && rm -Rf /opt/2020.2.zip \
+    && unzip /opt/perforce/2020.2.zip \
+    && rm -Rf /opt/perforce/2020.2.zip \
     && mv /opt/perforce/helix-authentication-service-2020.2 /opt/perforce/helix-auth-svc \
     && npm i -g pm2 \
     && cd /
 
+WORKDIR /opt/perforce/helix-auth-svc
 
-RUN cd /opt/perforce/helix-auth-svc \
- && npm install \
- && cd /
+RUN npm install
+
+WORKDIR /
  
-RUN mv /opt/node_modules/ /opt/perforce/helix-auth-svc/node_modules \
- && mv /opt/package-lock.json /opt/perforce/helix-auth-svc/package-lock.json
-
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
