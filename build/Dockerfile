@@ -52,6 +52,9 @@ RUN mkdir -p /opt/perforce/ \
     && npm i -g pm2 \
     && cd /
 
+# Create a package.json file
+RUN echo '{"dependencies": {"module-alias": "latest"}}' > /opt/package.json
+
 RUN cd /opt/ \
  && npm install --save module-alias \
  && cd /
