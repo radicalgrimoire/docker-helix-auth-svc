@@ -42,7 +42,9 @@ RUN echo 'export LANG=ja_JP.UTF-8' >> ~/.bashrc ;\
 RUN wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - ;\
     echo "deb http://package.perforce.com/apt/ubuntu focal release" >> /etc/apt/sources.list.d/perforce.list
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
+RUN apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get -y install helix-auth-svc nodejs npm \
     && npm install -g pm2 \
