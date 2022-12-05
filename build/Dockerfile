@@ -52,11 +52,9 @@ RUN mkdir -p /opt/perforce/ \
     && npm i -g pm2 \
     && cd /
 
-# Create a package.json file
-RUN echo '{"dependencies": {"module-alias": "latest"}}' > /opt/package.json
 
-RUN cd /opt/ \
- && npm install --save module-alias \
+RUN cd /opt/perforce/helix-auth-svc \
+ && npm install \
  && cd /
  
 RUN mv /opt/node_modules/ /opt/perforce/helix-auth-svc/node_modules \
