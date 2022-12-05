@@ -49,6 +49,7 @@ RUN mkdir -p /opt/perforce/ \
     && unzip /opt/perforce/2020.2.zip \
     && rm -Rf /opt/perforce/2020.2.zip \
     && mv /opt/perforce/helix-authentication-service-2020.2 /opt/perforce/helix-auth-svc \
+    && npm install uuid@7 \
     && npm i -g pm2 \
     && cd /
 
