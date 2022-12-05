@@ -2,7 +2,7 @@ FROM ubuntu:focal
 LABEL maintainer "ueno.s <ueno.s@gamestudio.co.jp>"
 
 # Add external files
-COPY files/run.sh /usr/local/bin/run.sh
+ADD files/run.sh /usr/local/bin/run.sh
 
 ARG P4NAME=master
 ARG P4TCP=1666
@@ -22,8 +22,7 @@ ENV P4NAME=$P4NAME \
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-RUN apt-get update -y \
-    && apt-get install -y wget gnupg less language-pack-ja-base language-pack-ja tzdata curl jq git openssl sudo vim wget unzip cron logrotate init systemd build-essential
+RUN apt-get update -y && apt-get install -y wget gnupg less language-pack-ja-base language-pack-ja tzdata curl jq git openssl sudo vim wget unzip cron logrotate init systemd build-essential nodejs npm node-gyp
 
 ARG USERNAME=perforce
 ARG GROUPNAME=perforce
@@ -46,8 +45,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get -y install helix-auth-svc nodejs npm \
-    && npm install -g pm2 \
+RUN apt-get update && apt-get -y install helix-auth-svc \
     && npm i -g pm2 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
