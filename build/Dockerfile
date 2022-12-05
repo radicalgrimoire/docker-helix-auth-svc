@@ -52,11 +52,10 @@ RUN mkdir -p /opt/perforce/ \
     && npm i -g pm2 \
     && cd /
 
-WORKDIR /opt/
-
-RUN npm install --save module-alias
-
-WORKDIR /
+RUN cd /opt/ \
+ && npm install --save module-alias \
+ && mv /opt/node_modules/ /opt/perforce/helix-auth-svc/node_modules \
+ && mv /opt/package-lock.json /opt/perforce/helix-auth-svc/package-lock.json
 
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/*
