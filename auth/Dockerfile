@@ -1,4 +1,4 @@
-FROM ghcr.io/radicalgrimoire/docker-helix-auth-svc/helix-auth-svc:9
+FROM ghcr.io/radicalgrimoire/docker-helix-auth-svc/helix-auth-svc:2022.2.11
 
 LABEL maintainer "ueno.s <ueno.s@gamestudio.co.jp>"
 

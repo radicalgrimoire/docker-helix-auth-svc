@@ -42,11 +42,14 @@ RUN wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - ;\
     echo "deb http://package.perforce.com/apt/ubuntu focal release" >> /etc/apt/sources.list.d/perforce.list
 
 RUN curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
-RUN apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get -y install helix-auth-svc \
-    && npm i -g pm2 \
+RUN pushd /opt/ \
+    && wget https://github.com/perforce/helix-authentication-service/archive/refs/tags/2020.2.zip \
+    && unzip 2020.2.zip
+    && mv helix-authentication-service-2020.2 helix-authentication-service
+    && popd
+
+RUN npm i -g pm2 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
