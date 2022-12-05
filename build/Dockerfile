@@ -46,7 +46,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
 RUN cd /opt/ \
     && wget https://github.com/perforce/helix-authentication-service/archive/refs/tags/2020.2.zip \
     && unzip 2020.2.zip \
+    && rm -Rf 2020.2.zip \
     && mv helix-authentication-service-2020.2 helix-authentication-service \
+    && cd helix-authentication-service \
+    && npm install --save module-alias \
     && cd /
 
 RUN npm i -g pm2 \
