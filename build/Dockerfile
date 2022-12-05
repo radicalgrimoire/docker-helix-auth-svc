@@ -47,6 +47,7 @@ RUN cd /opt/ \
     && wget https://github.com/perforce/helix-authentication-service/archive/refs/tags/2020.2.zip \
     && unzip 2020.2.zip \
     && mv /opt/helix-authentication-service-2020.2 /opt/helix-authentication-service \
+    && cd /opt/helix-authentication-service \
     && npm install --save module-alias \
     && npm i -g pm2 \
     && cd /
