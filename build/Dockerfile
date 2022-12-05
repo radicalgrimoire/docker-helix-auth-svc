@@ -54,7 +54,9 @@ RUN mkdir -p /opt/perforce/ \
 
 RUN cd /opt/ \
  && npm install --save module-alias \
- && mv /opt/node_modules/ /opt/perforce/helix-auth-svc/node_modules \
+ && cd /
+ 
+RUN mv /opt/node_modules/ /opt/perforce/helix-auth-svc/node_modules \
  && mv /opt/package-lock.json /opt/perforce/helix-auth-svc/package-lock.json
 
 RUN apt-get clean \
