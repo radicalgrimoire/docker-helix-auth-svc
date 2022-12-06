@@ -43,15 +43,14 @@ RUN wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - ;\
 
 RUN curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
 
+WORKDIR /opt/perforce/
+
 RUN mkdir -p /opt/perforce/ \
-    && cd /opt/perforce/ \
     && wget https://github.com/perforce/helix-authentication-service/archive/refs/tags/2020.2.zip \
     && unzip /opt/perforce/2020.2.zip \
     && rm -Rf /opt/perforce/2020.2.zip \
     && mv /opt/perforce/helix-authentication-service-2020.2 /opt/perforce/helix-auth-svc \
-    && npm install uuid@7 \
-    && npm i -g pm2 \
-    && cd /
+    && npm i -g pm2
 
 WORKDIR /opt/perforce/helix-auth-svc
 
