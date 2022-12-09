@@ -41,7 +41,7 @@ RUN echo 'export LANG=ja_JP.UTF-8' >> ~/.bashrc ;\
 RUN wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - ;\
     echo "deb http://package.perforce.com/apt/ubuntu focal release" >> /etc/apt/sources.list.d/perforce.list
 
-RUN curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 
 WORKDIR /opt/perforce/
 
