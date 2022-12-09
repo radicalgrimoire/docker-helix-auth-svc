@@ -40,7 +40,8 @@ RUN echo 'export LANG=ja_JP.UTF-8' >> ~/.bashrc ;\
 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 
-RUN apt-get update -y && apt-get install -y build-essential nodejs npm node-gyp apt-utils
+RUN apt-get update -y && \
+    apt-get install -y build-essential nodejs npm node-gyp apt-utils
 
 
 RUN wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - ;\
