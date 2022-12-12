@@ -22,7 +22,7 @@ ENV P4NAME=$P4NAME \
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-RUN apt-get update -y && apt-get install -y wget gnupg less language-pack-ja-base language-pack-ja tzdata curl jq git openssl sudo vim wget unzip cron logrotate init systemd build-essential npm
+RUN apt-get update -y && apt-get install -y wget gnupg less language-pack-ja-base language-pack-ja tzdata curl jq git openssl sudo vim wget unzip cron logrotate init systemd build-essential npm nodejs node-gyp apt-utils
 
 ARG USERNAME=perforce
 ARG GROUPNAME=perforce
@@ -44,7 +44,7 @@ RUN wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - ;\
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 
-RUN apt-get update -y && apt-get install -y nodejs node-gyp apt-utils
+RUN apt-get update -y && apt-get install -y nodejs
 
 WORKDIR /opt/perforce/
 
