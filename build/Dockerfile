@@ -22,7 +22,7 @@ ENV P4NAME=$P4NAME \
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-RUN apt-get update -y && apt-get install -y wget gnupg less language-pack-ja-base language-pack-ja tzdata curl jq git openssl sudo vim wget unzip cron logrotate init systemd build-essential npm nodejs node-gyp apt-utils
+RUN apt-get update -y && apt-get install -y wget gnupg less language-pack-ja-base language-pack-ja tzdata curl jq git openssl sudo vim wget unzip cron logrotate init systemd build-essential npm nodejs node-gyp apt-utils build-essential curl git
 
 ARG USERNAME=perforce
 ARG GROUPNAME=perforce
@@ -42,17 +42,17 @@ RUN wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - ;\
     echo "deb http://package.perforce.com/apt/ubuntu focal release" >> /etc/apt/sources.list.d/perforce.list
 
 
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 
 RUN apt-get update -y && apt-get install -y nodejs
 
 WORKDIR /opt/perforce/
 
 RUN mkdir -p /opt/perforce/ \
-    && wget https://github.com/perforce/helix-authentication-service/archive/refs/tags/2020.2.zip \
-    && unzip /opt/perforce/2020.2.zip \
-    && rm -Rf /opt/perforce/2020.2.zip \
-    && mv /opt/perforce/helix-authentication-service-2020.2 /opt/perforce/helix-auth-svc \
+    && wget https://github.com/perforce/helix-authentication-service/archive/refs/tags/2024.1.zip \
+    && unzip /opt/perforce/2024.1.zip \
+    && rm -Rf /opt/perforce/2024.1.zip \
+    && mv /opt/perforce/helix-authentication-service-2024.1 /opt/perforce/helix-auth-svc \
     && npm i -g pm2
 
 WORKDIR /opt/perforce/helix-auth-svc
