@@ -1,1 +1,0 @@
-docker build -t helix-auth-svc -f ./Dockerfile ./
