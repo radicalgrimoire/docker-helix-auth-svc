@@ -1,12 +1,5 @@
 version: '3'
 
-#---NETWORKS---------------------------------------------------
-networks:
-  default:
-    external:
-      name: helixcore_app_net
-
-
 services:
   helixcore:
     container_name: helix-auth-svc
